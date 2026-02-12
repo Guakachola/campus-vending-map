@@ -1,0 +1,36 @@
+body {
+  font-family: Arial;
+  text-align: center;
+}
+
+.map-container {
+  position: relative;
+  display: inline-block;
+}
+
+.map-image {
+  width: 800px;
+}
+
+.marker {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  cursor: pointer;
+}
+
+#info-panel {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid black;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hidden {
+  display: none;
+}
+
