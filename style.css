@@ -15,7 +15,9 @@ body {
 .map-image {
 
 }
-
+.leaflet-popup-content {
+  font-size: 16px;
+}
 .marker {
   width: 20px;
   height: 20px;
