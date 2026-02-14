@@ -34,3 +34,9 @@ body {
   display: none;
 }
 
+#map {
+  height: 600px;
+  width: 80%;
+  margin: auto;
+  border-radius: 8px;
+}
