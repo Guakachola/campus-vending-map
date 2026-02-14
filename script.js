@@ -1,46 +1,42 @@
-const vendingMachines = {
-  1: {
-    name: "SEC 2 - Breakout Room",
+const map = L.map('map').setView([29.7199, -95.3422], 16);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+const vendingMachines = [
+  {
+    name: "Science Building - Floor 1",
+    coords: [29.7202, -95.3430],
     drinks: [
-      { name: "White Monster", price: 3.75 },
-      { name: "Dasani", price: 2.75 },
-      { name: "Water", price: 1.75 }
+      { name: "Coke", price: 2.25 },
+      { name: "Sprite", price: 2.25 }
     ]
   },
-  2: {
+  {
     name: "Library - Entrance",
+    coords: [29.7188, -95.3415],
     drinks: [
-      { name: "Dr Pepper", price: 2.50 },
-      { name: "Fanta", price: 2.25 }
+      { name: "Dr Pepper", price: 2.50 }
     ]
   }
-};
+];
 
-document.querySelectorAll(".marker").forEach(marker => {
-  marker.addEventListener("click", () => {
-    const id = marker.getAttribute("data-id");
-    showMachineInfo(id);
-  });
-});
+vendingMachines.forEach(machine => {
 
-function showMachineInfo(id) {
-  const machine = vendingMachines[id];
+  const marker = L.marker(machine.coords).addTo(map);
 
-  document.getElementById("machine-name").innerText = machine.name;
-
-  const drinkList = document.getElementById("drink-list");
-  drinkList.innerHTML = "";
+  let drinkListHTML = "<ul>";
 
   machine.drinks.forEach(drink => {
-    const li = document.createElement("li");
-    li.innerText = `${drink.name} - $${drink.price}`;
-    drinkList.appendChild(li);
+    drinkListHTML += `<li>${drink.name} - $${drink.price}</li>`;
   });
 
-  document.getElementById("info-panel").classList.remove("hidden");
-}
+  drinkListHTML += "</ul>";
 
-function closePanel() {
-  document.getElementById("info-panel").classList.add("hidden");
-}
+  marker.bindPopup(`
+    <b>${machine.name}</b>
+    ${drinkListHTML}
+  `);
 
+});
