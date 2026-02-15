@@ -1,6 +1,7 @@
 body {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   text-align: center;
+  margin: 0;
 }
 #map {
   height: 70vh;
@@ -40,6 +41,10 @@ body {
   display: none;
 }
 
+h1 {
+  text-align: center;
+  padding: 10px;
+}
 #map {
   height: 600px;
   width: 80%;
