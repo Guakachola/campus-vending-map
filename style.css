@@ -51,3 +51,13 @@ h1 {
   margin: auto;
   border-radius: 8px;
 }
+
+.submission-badge {
+  background: #007bff;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-left: 6px;
+}
+

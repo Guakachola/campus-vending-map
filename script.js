@@ -10,24 +10,59 @@ const vendingMachines = [
     name: "Science Building - Floor 1",
     coords: [29.7202, -95.3430],
     drinks: [
-      { name: "Coke", price: 2.25 },
-      { name: "Sprite", price: 2.25 }
+      { 
+        name: "Coke", 
+        history: [ {
+          price: 2.25, timestamp: Date.now()} 
+        ]
+      },
+      { 
+        name: "Sprite", 
+        history: [ {
+          price: 2.25, timestamp: Date.now() }
+        ]
+      }
     ]
   },
   {
     name: "Library - Entrance",
     coords: [29.7188, -95.3415],
     drinks: [
-      { name: "Dr Pepper", price: 2.50 }
+      { 
+        name: "Dr Pepper", 
+        history: [{
+        price: 2.50, timestamp: Date.now() }
+        ]
+      }
     ]
   }
 ];
+
+//help function
+
+function getLatestPrice(drink) {
+  return drink.history[drink.history.length - 1].price;
+}
+
+function getLastUpdated(drink) {
+  const timestamp = drink.history[drink.history.length - 1].timestamp;
+  return new Date(timestamp).toLocaleString();
+}
+
+function getSubmissionCount(drink) {
+  return drink.history.length;
+}
 
 function generatePopupContent(machine, index) {
   let drinkList = machine.drinks
     .map((drink, drinkIndex) => `
       <div style="margin-bottom:6px;">
-        ${drink.name} - $${drink.price.toFixed(2)}
+        ${drink.name} - $${getLatestPrice(drink).toFixed(2)} <br/>
+        <span class="submission-badge">
+          ${getSubmissionCount(drink)} submissions
+        </span>
+        <br/>
+        <small>Last updated: ${getLastUpdated(drink)}</small><br/>
         <button onclick="showUpdateForm(${index}, ${drinkIndex})">
           Update
         </button>
@@ -43,7 +78,6 @@ function generatePopupContent(machine, index) {
     </div>
   `;
 }
-
 
 const vendingIcon = L.icon({
   iconUrl: 'assests/vending.png',
@@ -96,7 +130,10 @@ const inout = document.getElementById(
   const newPrice = pareseFloat(input.value);
 
   if (!isNaN(newPrice)) {
-    venginMachines[machineIndex].drinks[drinkIndex].price = newPrice;
+    venginMachines[machineIndex].drinks[drinkIndex].history.push({
+      price: newPrice,
+      timestamp: Date.now()
+    });
 
     map.closePopup();
 
