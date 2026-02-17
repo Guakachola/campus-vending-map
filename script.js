@@ -1,4 +1,5 @@
 const map = L.map('map').setView([29.7199, -95.3422], 16);
+const markers = [];
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
@@ -22,6 +23,28 @@ const vendingMachines = [
   }
 ];
 
+function generatePopupContent(machine, index) {
+  let drinkList = machine.drinks
+    .map((drink, drinkIndex) => `
+      <div style="margin-bottom:6px;">
+        ${drink.name} - $${drink.price.toFixed(2)}
+        <button onclick="showUpdateForm(${index}, ${drinkIndex})">
+          Update
+        </button>
+      </div>
+    `)
+    .join("");
+
+  return `
+    <div>
+      <h3>${machine.name}</h3>
+      ${drinkList}
+      <div id="update-form-${index}"></div>
+    </div>
+  `;
+}
+
+
 const vendingIcon = L.icon({
   iconUrl: 'assests/vending.png',
   iconSize: [40, 40],      // size of icon
@@ -31,22 +54,54 @@ const vendingIcon = L.icon({
 
 vendingMachines.forEach(machine => {
 
-  const marker = L.marker(machine.coords, { icon: vendingIcon}).addTo(map);
+  const marker = L.marker([machine.lat, machine.lng], { icon: vendingIcon}).addTo(map);
 
-  let drinkListHTML = "<ul>";
+  marker.bindPopup(generatePopupContent(machine, index));
 
-  machine.drinks.forEach(drink => {
-    drinkListHTML += `<li>${drink.name} - $${drink.price}</li>`;
-  });
-
-  drinkListHTML += "</ul>";
-
-  marker.bindPopup(`
-    <b>${machine.name}</b>
-    ${drinkListHTML}
-  `);
-
+  markers.push(marker);
+  
 });
+
+function showUpdateForm(machineIndex, drinkIndex) {
+  const machine = vendingMachines[machineIndex];
+  const drink = machine.drinks[drinkIndex];
+
+  const formHTML = `
+    <div style="margin-top:10px;">
+      <strong>Update ${drink.name}</strong><br/>
+      <input 
+        type="number" 
+        step="0.01" 
+        id="new-price-${machineIndex}-${drinkIndex}" 
+        placeholder="New price"
+        style="width:80px;"
+      />
+      <button onclick="submitPriceUpdate(${machineIndex}, ${drinkIndex})">
+        Submit
+      </button>
+    </div>
+  `;
+
+  document.getElementById(`update-form-${machineIndex}`).innerHTML = formHTML;
+}
+
+function submitPriceUpdate(machineIndex, drinkIndex) {
+const inout = document.getElementById(
+  `new-price-${machineIndex}-${drinkIndex}`
+  );
+
+  const newPrice = pareseFloat(input.value);
+
+  if (!isNaN(newPrice)) {
+    venginMachines[machineIndex].drinks[drinkIndex].price = newPrice;
+
+    map.closePopup();
+
+    const marker = markers[machineIndex];
+    marker.bindPopup(generatePopupContent(veindingMachines[machineIndex], machineIndex));
+    marker.openPopup();
+  }
+}
 
 map.locate({
   setView: true,
