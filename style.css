@@ -2,15 +2,55 @@ body {
   font-family: Arial, sans-serif;
   text-align: center;
   margin: 0;
+  background-color: #F5F5F7;
 }
-#map {
-  height: 70vh;
-  width: 100%;
+button {
+  background: #007AFF;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
 }
 
+button:hover {
+  background: #0063CC;
+  transform: scale(1.03);
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: none;
+}
+
+.leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.locate-btn{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
+}
 .map-container {
   position: relative;
   display: inline-block;
+  align-items: center;
 }
 
 .map-image {
@@ -46,18 +86,20 @@ h1 {
   padding: 10px;
 }
 #map {
-  height: 600px;
-  width: 80%;
+  height: 90vh;
+  width: 75%;
   margin: auto;
   border-radius: 8px;
+  align-items: center;
 }
 
 .submission-badge {
-  background: #007bff;
-  color: white;
-  padding: 2px 6px;
-  border-radius: 12px;
+  background: rgba(0, 122, 255, 0.12);
+  color: #007AFF;
+  padding: 4px 8px;
+  border-radius: 999px;
   font-size: 12px;
+  font-weight: 500;
   margin-left: 6px;
 }
 
@@ -75,4 +117,17 @@ h1 {
 .spiwer-button-next,
 .swiper-button-prev {
   color: black;
+}
+
+.title{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  font-family: 'Roboto Mono', monospace;
+  border-radius: 15px;
+  border-style: solid;
+  border-width: 3px;
+  background-color: #F5F5F7;
+  color: #5E5CE6;
 }
