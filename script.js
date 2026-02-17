@@ -40,3 +40,13 @@ vendingMachines.forEach(machine => {
   `);
 
 });
+
+const vendingIcon = L.icon({
+  iconUrl: 'icons/vending.png',
+  iconSize: [40, 40],      // size of icon
+  iconAnchor: [20, 40],    // point of icon that touches map
+  popupAnchor: [0, -40]    // where popup opens relative to icon
+});
+
+
+
