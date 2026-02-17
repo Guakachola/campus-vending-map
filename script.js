@@ -24,7 +24,7 @@ const vendingMachines = [
 
 vendingMachines.forEach(machine => {
 
-  const marker = L.marker(machine.coords).addTo(map);
+  const marker = L.marker(machine.coords, { icon: vendingIcon}).addTo(map);
 
   let drinkListHTML = "<ul>";
 
@@ -42,7 +42,7 @@ vendingMachines.forEach(machine => {
 });
 
 const vendingIcon = L.icon({
-  iconUrl: 'icons/vending.png',
+  iconUrl: 'assests/vending.png',
   iconSize: [40, 40],      // size of icon
   iconAnchor: [20, 40],    // point of icon that touches map
   popupAnchor: [0, -40]    // where popup opens relative to icon
