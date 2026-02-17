@@ -22,6 +22,13 @@ const vendingMachines = [
   }
 ];
 
+const vendingIcon = L.icon({
+  iconUrl: 'assests/vending.png',
+  iconSize: [40, 40],      // size of icon
+  iconAnchor: [20, 40],    // point of icon that touches map
+  popupAnchor: [0, -40]    // where popup opens relative to icon
+});
+
 vendingMachines.forEach(machine => {
 
   const marker = L.marker(machine.coords, { icon: vendingIcon}).addTo(map);
@@ -41,12 +48,42 @@ vendingMachines.forEach(machine => {
 
 });
 
-const vendingIcon = L.icon({
-  iconUrl: 'assests/vending.png',
-  iconSize: [40, 40],      // size of icon
-  iconAnchor: [20, 40],    // point of icon that touches map
-  popupAnchor: [0, -40]    // where popup opens relative to icon
+map.locate({
+  setView: true,
+  maxZoom: 17
+})
+
+map.on('locationfound', function(e) {
+
+  const userLatLng = e.latlng;
+
+  L.marker(userLatLng)
+    .addTo(map)
+    .bindPopup("You are here!")
+    .openPopup();
+  
+  let nearestMachine = null;
+  let shortestDistance = Infinity;
+
+  veindingMachines.forEach(machine => {
+  const machineLatLng = L.latlng(machine.coords);
+  const distance = userLatLng.distanceTo(machineLatLng);
+  
+  if (distance < shortestDistance) {
+    shortestDistance = distance;
+    nearestMachine = machine;
+  }
+  });
+
+  if (nearestMachine) {
+    L.marker(nearestMachine.coords)
+    .addTo(map)
+    .bindPopup(`Nearets Machine <br><br>${nearestMachine.name}</br>`);
+  }
+
 });
 
-
+map.on('locationerror', function(e) {
+  alert("Location access denied. Enable GPS for better experience.");
+});
 
