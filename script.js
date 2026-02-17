@@ -86,7 +86,7 @@ const vendingIcon = L.icon({
   popupAnchor: [0, -40]    // where popup opens relative to icon
 });
 const personIcon = L.icon({
-  iconUrl: 'assests/person.jpg',
+  iconUrl: 'assests/person.png',
   iconSize: [40, 40],      // size of icon
   iconAnchor: [20, 40],    // point of icon that touches map
   popupAnchor: [0, -40]    // where popup opens relative to icon
