@@ -52,14 +52,17 @@ const vendingIcon = L.icon({
   popupAnchor: [0, -40]    // where popup opens relative to icon
 });
 
-vendingMachines.forEach(machine => {
 
-  const marker = L.marker([machine.lat, machine.lng], { icon: vendingIcon}).addTo(map);
+vendingMachines.forEach((machine, index) => {
+
+  const marker = L.marker(machine.coords, { 
+    icon: vendingIcon 
+  }).addTo(map);
 
   marker.bindPopup(generatePopupContent(machine, index));
 
   markers.push(marker);
-  
+
 });
 
 function showUpdateForm(machineIndex, drinkIndex) {
