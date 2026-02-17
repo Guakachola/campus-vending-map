@@ -54,27 +54,29 @@ function getSubmissionCount(drink) {
 }
 
 function generatePopupContent(machine, index) {
-  let drinkList = machine.drinks
+  let slides = machine.drinks
     .map((drink, drinkIndex) => `
-      <div style="margin-bottom:6px;">
-        ${drink.name} - $${getLatestPrice(drink).toFixed(2)} <br/>
-        <span class="submission-badge">
-          ${getSubmissionCount(drink)} submissions
-        </span>
-        <br/>
-        <small>Last updated: ${getLastUpdated(drink)}</small><br/>
-        <button onclick="showUpdateForm(${index}, ${drinkIndex})">
-          Update
-        </button>
+      <div class="swiper-slide">
+        <div style="text-align:center;">
+          <h4>${drink.name}</h4>
+          <p>$${getLatestPrice(drink).toFixed(2)}</p>
+          <p>${getSubmissionCount(drink)} submissions</p>
+          <small>${getLastUpdated(drink)}</small><br/>
+          <button onclick="showUpdateForm(${index}, ${drinkIndex})">
+            Update Price
+          </button>
+        </div>
       </div>
     `)
     .join("");
 
   return `
-    <div>
-      <h3>${machine.name}</h3>
-      ${drinkList}
-      <div id="update-form-${index}"></div>
+    <div class="swiper mySwiper-${index}">
+      <div class="swiper-wrapper">
+        ${slides}
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
     </div>
   `;
 }
@@ -99,10 +101,18 @@ vendingMachines.forEach((machine, index) => {
   }).addTo(map);
 
   marker.bindPopup(generatePopupContent(machine, index));
+  marker.on('popupopen', function() {
+  new Swiper(`.mySwiper-${index}`, {
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+});
 
   markers.push(marker);
 
-});
+``});
 
 function showUpdateForm(machineIndex, drinkIndex) {
   const machine = vendingMachines[machineIndex];

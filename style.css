@@ -61,3 +61,18 @@ h1 {
   margin-left: 6px;
 }
 
+.swiper {
+  width: 250px;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.spiwer-button-next,
+.swiper-button-prev {
+  color: black;
+}
