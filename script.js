@@ -81,6 +81,43 @@ function generatePopupContent(machine, index) {
   `;
 }
 
+function generateSideBar() {
+  const sidebar = document.getElementById("sidebar");
+
+  let content = `
+    <div class="sidebar-header">
+      <h2>All Drinks</h2>
+    </div>
+  `;
+console.log(vendingMachines);
+
+  vendingMachines.forEach(machine => {
+    content += `
+      <div class="machine-section">
+        <h3 class="machine-title">${machine.name}</h3>
+    `;
+
+    machine.drinks.forEach(drink => {
+      content += `
+        <div class="drink-item">
+          <div>
+            <div class="drink-name">${drink.name}</div>
+            <div class="drink-meta">
+              ${getSubmissionCount(drink)} submissions
+            </div>
+          </div>
+          <div class="drink-price">
+            $${getLatestPrice(drink).toFixed(2)}
+          </div>
+        </div>
+      `;
+    });
+
+    content += `</div>`;
+  });
+
+  sidebar.innerHTML = content;
+}
 const vendingIcon = L.icon({
   iconUrl: 'assests/vending.png',
   iconSize: [40, 40],      // size of icon
@@ -197,3 +234,4 @@ map.on('locationerror', function(e) {
   alert("Location access denied. Enable GPS for better experience.");
 });
 
+generateSideBar();

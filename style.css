@@ -1,8 +1,14 @@
+
+
 body {
   font-family: Arial, sans-serif;
   text-align: center;
   margin: 0;
-  background-color: #F5F5F7;
+  background: linear-gradient(
+    180deg,
+    #F5F5F7 0%,
+    #E9ECF4 100%
+  );
 }
 button {
   background: #007AFF;
@@ -19,6 +25,45 @@ button:hover {
   background: #0063CC;
   transform: scale(1.03);
 }
+
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+
+.drink-item {
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 16px 18px;
+  box-shadow: 
+    0 4px 10px rgba(0,0,0,0.04),
+    0 1px 2px rgba(0,0,0,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.drink-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 8px 20px rgba(0,0,0,0.06),
+    0 3px 6px rgba(0,0,0,0.08);
+}
+.drink-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1C1C1E;
+}
+
+.drink-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #5E5CE6; /* soft indigo accent */
+}
+
 
 .leaflet-popup-content-wrapper {
   background: rgba(255, 255, 255, 0.85);
@@ -68,6 +113,18 @@ button:hover {
   cursor: pointer;
 }
 
+.machine-section{
+  margin-bottom: 20px;
+}
+
+.machine-title{
+  font-size: 14px;
+  font-weight: 600px;
+  color: #8E8E93;
+  margin-bottom: 10px;
+  padding-left: 6px;
+}
+
 #info-panel {
   margin-top: 20px;
   padding: 10px;
@@ -86,11 +143,23 @@ h1 {
   padding: 10px;
 }
 #map {
+  padding: 20px;
+  margin-left: 50px;
+  border-style: solid;
+  border-radius: 9px;
+  flex: 1;
   height: 90vh;
-  width: 75%;
-  margin: auto;
-  border-radius: 8px;
-  align-items: center;
+}
+
+#sidebar{
+  width: 320px;
+  background: #F5F5F7;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
 }
 
 .submission-badge {
@@ -121,13 +190,20 @@ h1 {
 
 .title{
   position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 20px;
+  right: 50%;
+  transform: translateX(-50%);
   z-index: 1000;
-  font-family: 'Roboto Mono', monospace;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+
   border-radius: 15px;
   border-style: solid;
   border-width: 3px;
-  background-color: #F5F5F7;
-  color: #5E5CE6;
+  background: rgba(255,255,255, 0.8);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+
+  color: #1C1C1E;
 }
