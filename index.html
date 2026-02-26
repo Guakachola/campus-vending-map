@@ -21,17 +21,15 @@
 </head>
 <body>
 
-  <h1 class="title"> UH Vending Machine Map </h1>
   <div class="app-container">
     <div id="sidebar"></div>
     <div id="map"></div>
-  </div>
-  <div id="info-panel" class="hidden">
-    <h2 id="machine-name"></h2>
-    <ul id="drink-list"></ul>
-    <button onclick="closePanel()">Close</button>
-  </div>
 
+    <button id="sidebar-open" class="floating-open hidden">=</button>
+
+    <div id="overlay" class="overlay hidden"></div>
+
+  </div>
   <script src="script.js"></script>
 </body>
 </html>

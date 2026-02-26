@@ -53,6 +53,7 @@ function getSubmissionCount(drink) {
   return drink.history.length;
 }
 
+
 function generatePopupContent(machine, index) {
   let slides = machine.drinks
     .map((drink, drinkIndex) => `
@@ -83,13 +84,14 @@ function generatePopupContent(machine, index) {
 
 function generateSideBar() {
   const sidebar = document.getElementById("sidebar");
+  
 
-  let content = `
-    <div class="sidebar-header">
+  let content = ` 
+    <button id="sidebar-close" class="sidebar-toggle">x</button>
+    <div class="sidebar-header"> 
       <h2>All Drinks</h2>
     </div>
   `;
-console.log(vendingMachines);
 
   vendingMachines.forEach(machine => {
     content += `
@@ -118,6 +120,42 @@ console.log(vendingMachines);
 
   sidebar.innerHTML = content;
 }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const app = document.getElementById("app");
+  const openBtn = document.getElementById("sidebar-open");
+  const closeBtn = document.getElementById("sidebar-close");
+  const overlay = document.getElementById("overlay");
+
+  if (openBtn) {
+    openBtn.addEventListener("click", () => {
+      app.classList.remove("sidebar-collapsed");
+      openBtn.classList.add("hidden");
+      overlay.classList.remove("hidden");
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      app.classList.add("sidebar-collapsed");
+      openBtn.classList.remove("hidden");
+      overlay.classList.add("hidden");
+    });
+  }
+
+  if (overlay) {
+    overlay.addEventListener("click", () => {
+      app.classList.add("sidebar-collapsed");
+      openBtn.classList.remove("hidden");
+      overlay.classList.add("hidden");
+    });
+  }
+
+});
+
+
 const vendingIcon = L.icon({
   iconUrl: 'assests/vending.png',
   iconSize: [40, 40],      // size of icon
