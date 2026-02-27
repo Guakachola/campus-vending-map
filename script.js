@@ -124,7 +124,7 @@ function generateSideBar() {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  const app = document.getElementById("app");
+  const app = document.getElementById("app-container");
   const openBtn = document.getElementById("sidebar-open");
   const closeBtn = document.getElementById("sidebar-close");
   const overlay = document.getElementById("overlay");
