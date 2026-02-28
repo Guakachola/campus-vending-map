@@ -120,44 +120,29 @@ function generateSideBar() {
 
   sidebar.innerHTML = content;
 }
-document.addEventListener("click", function(e) {
+document.addEventListener("click", function (e) {
 
-  if (e.target.id === "sidebar-close") {
-    const app = document.getElementById("app-container");
-    const openBtn = document.getElementById("sidebar-open");
-    const overlay = document.getElementById("overlay");
+  const app = document.getElementById("app-container");
+  const openBtn = document.getElementById("sidebar-open");
+  const overlay = document.getElementById("overlay");
 
+  if (!app || !openBtn || !overlay) return;
+
+  // OPEN SIDEBAR
+  if (e.target.id === "sidebar-open") {
+    app.classList.remove("sidebar-collapsed");
+    openBtn.classList.add("hidden");
+    overlay.classList.remove("hidden");
+  }
+
+  // CLOSE SIDEBAR
+  if (e.target.id === "sidebar-close" || e.target.id === "overlay") {
     app.classList.add("sidebar-collapsed");
     openBtn.classList.remove("hidden");
     overlay.classList.add("hidden");
   }
 
 });
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const app = document.getElementById("app-container");
-  const openBtn = document.getElementById("sidebar-open");
-  const overlay = document.getElementById("overlay");
- 
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      app.classList.add("sidebar-collasped");
-      openBtn.classList.remove("hidden");
-      overlay.classList.add("hidden");
-    });
-  }
-
-  if (overlay) {
-    overlay.addEventListener("click", () => {
-      app.classList.add("sidebar-collasped");
-      openBtn.classList.remove("hidden");
-      overlay.classList.add("hidden");
-    });
-  }
-
-});
-
 
 const vendingIcon = L.icon({
   iconUrl: 'assests/vending.png',
@@ -276,3 +261,5 @@ map.on('locationerror', function(e) {
 });
 
 generateSideBar();
+document.getElementById("app-container")
+  .classList.add("sidebar-collapsed");

@@ -5,9 +5,7 @@
     height: 100%;
   }
 
-  .app-container.sidebar-collapsed #sidebar {
-    transform: translateX(-100%);
-  }
+
 
   #map {
     flex: 1;
@@ -210,7 +208,6 @@ h1 {
 .app-container.sidebar-collasped #sidebar{
   transform: translateX(-100%);
 }
-
 
 .sidebar-toggle{
   align-self: flex-end;
