@@ -105,7 +105,7 @@ function generateSideBar() {
           <div>
             <div class="drink-name">${drink.name}</div>
             <div class="drink-meta">
-              ${getSubmissionhttps://chatgpt.com/s/t_69a0b815774c8191bcb5bfc6ab953fdaCount(drink)} submissions
+              ${getSubmissionCount(drink)} submissions
             </div>
           </div>
           <div class="drink-price">
