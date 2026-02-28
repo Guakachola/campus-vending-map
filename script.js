@@ -120,26 +120,29 @@ function generateSideBar() {
 
   sidebar.innerHTML = content;
 }
+document.addEventListener("click", function(e) {
 
+  if (e.target.id === "sidebar-close") {
+    const app = document.getElementById("app-container");
+    const openBtn = document.getElementById("sidebar-open");
+    const overlay = document.getElementById("overlay");
+
+    app.classList.add("sidebar-collapsed");
+    openBtn.classList.remove("hidden");
+    overlay.classList.add("hidden");
+  }
+
+});
 
 document.addEventListener("DOMContentLoaded", function () {
 
   const app = document.getElementById("app-container");
   const openBtn = document.getElementById("sidebar-open");
-  const closeBtn = document.getElementById("sidebar-close");
   const overlay = document.getElementById("overlay");
-
-  if (openBtn) {
-    openBtn.addEventListener("click", () => {
-      app.classList.remove("sidebar-collapsed");
-      openBtn.classList.add("hidden");
-      overlay.classList.remove("hidden");
-    });
-  }
-
+ 
   if (closeBtn) {
     closeBtn.addEventListener("click", () => {
-      app.classList.add("sidebar-collapsed");
+      app.classList.add("sidebar-collasped");
       openBtn.classList.remove("hidden");
       overlay.classList.add("hidden");
     });
@@ -147,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (overlay) {
     overlay.addEventListener("click", () => {
-      app.classList.add("sidebar-collapsed");
+      app.classList.add("sidebar-collasped");
       openBtn.classList.remove("hidden");
       overlay.classList.add("hidden");
     });
